@@ -1,0 +1,32 @@
+
+== Data Asal 
+
+Basis data dengan _schema_ PBB pada sistem basis data Oracle.
+
+== Kegiatan Manipulasi Yang Dilakukan
+
+Melakukan pengambilan data pembayaran PBB-P2 untuk tanggal 31 Desember 2022 dan 1 Januari 2023 sebagai bahan rekonsiliasi data dengan Bank Jateng.
+
+== Hasil Manipulasi
+
+Hasil manipulasi data dapat diakses pada alamat https://docs.google.com/spreadsheets/d/1_uM-H3xKYMGuiKrhW9ikMRXf3IOpnm-GBBirHD_IH_s/edit?usp=sharing dan https://docs.google.com/spreadsheets/d/15yNfr-3XVQQyJgXVil3J0Bc9zvEEvBqzZ8zqtp5U26g/edit?usp=sharing
+
+== _Script_ atau _command_ yang Digunakan Untuk Melakukan Manipulasi
+
+----
+select kd_propinsi||kd_dati2||kd_kecamatan||kd_kelurahan||kd_blok||no_urut||kd_jns_op nop, 
+  thn_pajak_sppt, jml_sppt_yg_dibayar
+from pembayaran_sppt
+where tgl_pembayaran_sppt between to_date('31122022000000','DDMMYYYYHH24MISS') and to_date('23122022235959','DDMMYYYYHH24MISS')
+order by kd_kecamatan, kd_kelurahan, kd_blok, no_urut, thn_pajak_sppt
+----
+
+dan
+
+----
+select kd_propinsi||kd_dati2||kd_kecamatan||kd_kelurahan||kd_blok||no_urut||kd_jns_op nop, 
+  thn_pajak_sppt, jml_sppt_yg_dibayar
+from pembayaran_sppt
+where tgl_pembayaran_sppt between to_date('01012023000000','DDMMYYYYHH24MISS') and to_date('01012023235959','DDMMYYYYHH24MISS')
+order by kd_kecamatan, kd_kelurahan, kd_blok, no_urut, thn_pajak_sppt
+----
